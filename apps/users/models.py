@@ -9,8 +9,8 @@ class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True,on_delete=models.CASCADE)
     #name = models.CharField(max_length=200, null=True)
     #last_name = models.CharField(max_length=200, null=True, blank=True)
-    phone = models.CharField(max_length=200, null=True)
     #email = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)
     address_1 = models.CharField(max_length=200, null=True)
     zip_code = models.CharField(max_length=5, null=True)
@@ -20,7 +20,6 @@ class Customer(models.Model):
         #return str(self.user.username) #using this one
         return str(self.user.username)
         #return self.name
-
 
 
 
