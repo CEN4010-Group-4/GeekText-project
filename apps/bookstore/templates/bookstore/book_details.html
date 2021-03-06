@@ -1,0 +1,91 @@
+{%  extends 'bookstore/main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+
+  
+  <div class="container">  
+    
+      <p>
+        <h1 style="text-align:center;color:green;"> 
+            GeekText Bookstore App<br>
+        </h1>
+
+            <h3 style="text-align:center;color:green;">
+            Book Details
+            </h3>
+          
+      </p>
+      
+        <!-- Bootstrap table class -->
+        <table class="table" >  
+            <style>
+                table,
+                th,
+                td {
+                    padding: 20px;
+                    border: .5px solid black;
+                    border-collapse: collapse;
+                     }
+            </style> 
+              
+            <tbody> 
+             
+                <tr>  
+                    <th scope="row">ID #</td>
+                    <td>{{ id }}</td>  
+                </tr>  
+                <tr>  
+                    <th scope="row">Book Title</td>  
+                    <td>{{ name }}</td>    
+                </tr>  
+                <tr>  
+                    <th scope="row">Cover Image</td>   
+                    <td>{{ cover }}</td>
+                </tr>
+                <tr>  
+                    <th scope="row">Author</td>   
+                    <td>{{ author }}</td>   
+                </tr>
+                <tr>  
+                    <th scope="row">Bio Info</td>  
+                    <td>{{ bio }}</td> 
+                </tr>
+                <tr>  
+                    <th scope="row">Description</td> 
+                    <td>{{ description }}</td>   
+                </tr>
+                <tr>  
+                    <th scope="row">Genre</td> 
+                    <td>{{ genre }}</td>   
+                </tr>
+                <tr>  
+                    <th scope="row">Publisher</td>  
+                    <td>{{ publisher }}</td> 
+                </tr>
+                <tr>  
+                    <th scope="row">Release Date</td>   
+                    <td>{{ release_date }}</td> 
+                </tr>
+                <tr>  
+                    <th scope="row">Rating</td>  
+                    <td>{{'coming soon'}}</td>                     
+                </tr>
+                <tr>  
+                    <th scope="row">Comments</td>  
+                    <td>{{'coming soon'}}</td>    
+                </tr>
+                  
+            </tbody>  
+        </table>  
+    </div>  
+<p>
+<a href="{% url 'all_books' %}"><h3 style="text-align:center">Complete List of Books</h3></a><br>
+
+
+<a href="{% url 'books' %}"><h3 style="text-align:center">Book Browsing and Sorting Page</h3></a>
+</p>
+
+{% endblock content %}
