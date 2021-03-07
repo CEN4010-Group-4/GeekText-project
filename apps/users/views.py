@@ -15,16 +15,12 @@ def home(request):
     return render(request,'bookstore/home.html')
 
 def books(request):
-<<<<<<< HEAD
     
     return render(request,'bookstore/books.html')
     
 
 
 
-=======
-    return render(request,'bookstore/books.html')
->>>>>>> 177066ebb5d8e23012b4dd8af64f8d38b60611ea
 
 @unauthenticated_user
 def registerPage(request):

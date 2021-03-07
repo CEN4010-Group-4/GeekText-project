@@ -39,12 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'apps.users',
-<<<<<<< HEAD
     'apps.bookstore',
     'django_mysql',
-=======
-    'apps.bookstore'
->>>>>>> 177066ebb5d8e23012b4dd8af64f8d38b60611ea
 ]
 
 MIDDLEWARE = [
@@ -86,11 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'testdb3',
         'USER': 'root',
-<<<<<<< HEAD
         'PASSWORD': 'password',
-=======
-        'PASSWORD': 'xxxx',
->>>>>>> 177066ebb5d8e23012b4dd8af64f8d38b60611ea
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {

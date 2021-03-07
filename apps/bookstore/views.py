@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-<<<<<<< HEAD
 from .models import Product
 from .models import Author
 
@@ -47,6 +46,4 @@ def books(request):
     return render(request,'bookstore/books.html')
 
 
-=======
->>>>>>> 177066ebb5d8e23012b4dd8af64f8d38b60611ea
 # Create your views here.

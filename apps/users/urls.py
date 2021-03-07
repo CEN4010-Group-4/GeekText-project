@@ -14,9 +14,6 @@ urlpatterns = [
     path('base/', views.base, name="base"),
     path('user/', views.userPage, name="user-page"),
     path('customer/', views.customer, name="customer"),
-<<<<<<< HEAD
     
-=======
->>>>>>> 177066ebb5d8e23012b4dd8af64f8d38b60611ea
 
 ]
