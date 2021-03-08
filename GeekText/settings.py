@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'apps.users',
     'apps.bookstore',
-    'django_mysql',
+    #'django_mysql',
 ]
 
 MIDDLEWARE = [
