@@ -1,0 +1,31 @@
+{%  extends 'bookstore/main.html' %}
+{% load crispy_forms_tags %}
+
+
+
+
+{% block content %}
+{{ form|crispy }}
+
+<h1>User Profile Page</h1>
+
+<div>
+<p>Fisrt Name: {{request.user.first_name}}</p>
+<p>Last Name: {{request.user.last_name}}</p>
+<p>Email Address: {{request.user.email}}</p>
+<p>User ID: {{request.user.username}}</p>
+</div>
+
+<div>
+<p>Users</p>
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock content %}
