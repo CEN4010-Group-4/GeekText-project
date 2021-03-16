@@ -17,39 +17,59 @@ class SearchView(TemplateView):
         context["results"] = results
         return context
 
-def book_details(request):
-    obj = Product.objects.get(id=1)
-    if Product.objects.get(id=1):
-            author_info = Author.objects.get(id=3)
+def book_details(request, id = None):
+    if id:
+        item = Product.objects.get(id=id)
+        
+    
+    
     context = {      
-        'id': obj.id, 
-        'name': obj.name,
-        'cover': obj.image,
-        'author': obj.author, 
-        'bio': author_info.biography,   
-        'description': obj.description,
-        'genre': obj.genre,
-        'publisher': obj.publisher,
-        'release_date': obj.release_date
+        'id': item.id, 
+        'name': item.name,
+        'cover': item.image,
+        'author': item.author, 
+        'bio': item.author.biography,   
+        'description': item.description,
+        'genre': item.genre,
+        'publisher': item.publisher,
+        'release_date': item.release_date
     }
     
     return render(request,'bookstore/book_details.html', context)
 
-def all_books(request):
-    obj = Product.objects.get(id=1)
 
+def all_books(request, id=None):
+    if id:
+        item = Product.objects.get(id=id)
+    else:
+        item = Product.objects.get(id=1)
+    
+    
     context = {
-        'items': Product.objects.all(),
-        'object': obj,
-        'id': obj.id, 
-        'name': obj.name,
-        'cover': obj.image,
-        'author': obj.author,
-       
+        'items': Product.objects.all().order_by('id'),
+        
+        'id': item.id, 
+        'name': item.name,
+        'cover': item.image,
+        'author': item.author,
     }
     
     return render(request,'bookstore/all_books.html', context)
 
+
+def book_author(request, id=None):
+    item = Product.objects.get(id=id)
+    
+    context = {
+        'items': Product.objects.all(),
+        'authors': Author.objects.all(),
+        'id': item.id, 
+        'name': item.name,
+        'cover': item.image,
+        'author': item.author,
+    }
+    
+    return render(request,'bookstore/book_author_with_pk.html', context)
 
 def books(request):
     return render(request,'bookstore/books.html')

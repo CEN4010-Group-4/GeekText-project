@@ -1,8 +1,8 @@
 {%  extends 'bookstore/main.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-
-
+from .models import Product
+from .models import Author
 {% block content %}
 
   
@@ -32,7 +32,7 @@
             </style> 
               
             <tbody> 
-             
+                
                 <tr>  
                     <th scope="row">ID #</td>
                     <td>{{ id }}</td>  
@@ -42,16 +42,20 @@
                     <td>{{ name }}</td>    
                 </tr>  
                 <tr>  
-                    <th scope="row">Cover Image</td>   
-                    <td>{{ cover }}</td>
+                    <th scope="row">Cover Image</td> 
+                     
+                    <td><a href="{% static cover %}" target="_blank">
+                    <img src="{% static cover %}" width="120" height="200"/></a></td>
+                    
                 </tr>
-                <tr>  
+                <tr> 
                     <th scope="row">Author</td>   
-                    <td>{{ author }}</td>   
+                    <td>{{ author }}</td>  
+                     
                 </tr>
                 <tr>  
                     <th scope="row">Bio Info</td>  
-                    <td>{{ bio }}</td> 
+                    <td>{{ author.biography }}</td> 
                 </tr>
                 <tr>  
                     <th scope="row">Description</td> 
@@ -69,15 +73,8 @@
                     <th scope="row">Release Date</td>   
                     <td>{{ release_date }}</td> 
                 </tr>
-                <tr>  
-                    <th scope="row">Rating</td>  
-                    <td>{{'coming soon'}}</td>                     
-                </tr>
-                <tr>  
-                    <th scope="row">Comments</td>  
-                    <td>{{'coming soon'}}</td>    
-                </tr>
-                  
+                
+                 
             </tbody>  
         </table>  
     </div>  

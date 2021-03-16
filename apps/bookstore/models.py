@@ -24,9 +24,9 @@ class Product(models.Model): # model to create table on database products
     author = models.ForeignKey('Author',related_name='authors',on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
-    image = models.ImageField(upload_to='products/%Y/%m/%d',blank=True)
-    image2 = models.ImageField(upload_to='products/%Y/%m/%d',blank=True)
-    image3 = models.ImageField(upload_to='products/%Y/%m/%d',blank=True)
+    image = models.ImageField(upload_to='static/media',blank=True)
+    image2 = models.ImageField(upload_to='media/%Y/%m/%d',blank=True)
+    image3 = models.ImageField(upload_to='media/%Y/%m/%d',blank=True)
     publisher = models.CharField(max_length=100, db_index=True)
     release_date = models.DateTimeField(null=True)
     description = models.TextField(blank=True)
@@ -34,6 +34,7 @@ class Product(models.Model): # model to create table on database products
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     
+
     class Meta:
         ordering = ('-created',)
         index_together = (('id', 'slug'),)

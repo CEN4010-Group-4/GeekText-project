@@ -1,0 +1,14 @@
+{%  extends 'bookstore/main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+from .models import Product
+{% block content %}
+<h3 style="text-align:center">
+{{author}}</h3>
+<p>
+<a href="{% url 'all_books' %}"><h3 style="text-align:center">Complete List of Books</h3></a><br>
+
+
+<a href="{% url 'books' %}"><h3 style="text-align:center">Book Browsing and Sorting Page</h3></a>
+</p>
+{% endblock content %}
