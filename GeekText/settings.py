@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.bookstore',
     'django_filters',
-    'apps.cart',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'testdb3',
         'USER': 'root',
-        'PASSWORD': 'BellaMile01!',
+        'PASSWORD': 'Mohammad2812',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {

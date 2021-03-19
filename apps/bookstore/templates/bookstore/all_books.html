@@ -38,6 +38,7 @@ from .models import Product
                     <td>{{ item.cover }}</td> 
                     <td>{{ item.author }}</td> 
                     
+                    <td><a href="{% url 'addtocart' item.id %}" class="btn btn-primary">Add To Cart</a>
                     
                     
                 </tr>  

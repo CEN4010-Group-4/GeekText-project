@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from ..bookstore.views import SearchView
+from ..bookstore.views import SearchView, cart, AddToCartView, ChangeCartView
 
 
 
@@ -18,6 +18,8 @@ urlpatterns = [
     path('user/', views.userPage, name="user-page"),
     path('customer/', views.customer, name="customer"),
     path('search/', SearchView.as_view(), name="search"),
-    path('cart/', views.cart, name="cart"),
+    path('cart/', cart.as_view(), name="cart"),
+    path("add-to-cart-<int:pro_id>/",AddToCartView.as_view(), name="addtocart"),
+    path("change-cart/<int:cp_id>/",ChangeCartView.as_view(), name = "changecart"),
 
 ]

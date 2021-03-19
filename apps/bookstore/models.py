@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import  reverse
+from apps.users.models import *
 # Create your models here.
 
 class Genre(models.Model): # model to create table on database genre
@@ -57,3 +58,23 @@ class Author(models.Model): # model to create table on database author
     
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+
+class Cart(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null = True, blank=True)
+    total = total = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(default=timezone.now, blank=True, null=True)
+
+    def __str__(self):
+        return "Cart: " + str(self.id)
+    
+class CartProduct(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    rate = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField()
+    subtotal = models.PositiveIntegerField()
+
+    def __str__(self):
+        return "Cart: " + str(self.cart.id) + " CartProduct: " + str(self.id)
+

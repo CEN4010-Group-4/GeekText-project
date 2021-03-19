@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Genre, Product, Author
+from .models import Genre, Product, Author, Cart, CartProduct
+
 
 
 @admin.register(Genre) # class to show fields of genre in django admin
@@ -18,3 +19,8 @@ class ProductAdmin(admin.ModelAdmin):
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name','biography']
     search_fields = ['pk','first_name', 'last_name']
+
+
+
+admin.site.register(
+    [Cart, CartProduct])
