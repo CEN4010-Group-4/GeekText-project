@@ -12,19 +12,23 @@ from .models import Product
             GeekText Complete List of Books<br>
         </h1>
 
-            <h3 style="text-align:center;color:green;">
+        <h3 style="text-align:center;color:green;">
             Click the Book Name for More Details
-            </h3>
+        </h3>
+
           
       </p>
       
         <!-- Bootstrap table class -->
-        <table class="table">  
+    <div class="container">
+      <div class="col-md-12">
+        <table id="myTable" class="table table-striped tablesorter">  
             <thead>  
                 <tr>  
                     <th scope="col">ID #</td>  
                     <th scope="col">Book Title</td>  
-                    <th scope="col">Cover Image</td>  
+                    <th scope="col">Genre</th>
+                    <th data-sorter="false" scope="col">Cover Image</td>  
                     <th scope="col">Author</td> 
                 </tr>  
             </thead>  
@@ -32,21 +36,25 @@ from .models import Product
             <tbody>  
                 {% for item in items %}
                 <tr>  
-                     
-                    <th scope="row">{{ item.id }}</td>   
+                    <td scope="row">{{ item.id }}</td>   
                     <td><a href="{% url 'book_details' %}">{{ item.name }}</a></td>   
+                    <td>{{ item.genre }}</td>
                     <td>{{ item.cover }}</td> 
                     <td>{{ item.author }}</td> 
                     
                     <td><a href="{% url 'addtocart' item.id %}" class="btn btn-primary">Add To Cart</a>
-                    
-                    
                 </tr>  
                 {% endfor %}
             </tbody>  
-        </table>  
+        </table>
+        {% endblock %}
+      </div>  
+    </div> 
+
+    
     </div>  
+  
 
 
-{% endblock content %}
+
 © 2021 GitHub, Inc.

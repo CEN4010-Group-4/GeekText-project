@@ -26,7 +26,7 @@ class SearchView(ListView):
             queryset_list = paginator.page(1)
         except EmptyPage:
             queryset_list = paginator.page(paginator.num_pages)
-        return queryset_list
+        return queryset_list    
 
 def book_details(request):
     obj = Product.objects.get(id=1)
