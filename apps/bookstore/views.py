@@ -18,12 +18,10 @@ class SearchView(TemplateView):
         return context
 
 def book_details(request, id = None):
-    if id:
-        item = Product.objects.get(id=id)
-        
+    item = Product.objects.get(id=id)
     
-    
-    context = {      
+    context = {   
+          
         'id': item.id, 
         'name': item.name,
         'cover': item.image,
@@ -34,7 +32,6 @@ def book_details(request, id = None):
         'publisher': item.publisher,
         'release_date': item.release_date
     }
-    
     return render(request,'bookstore/book_details.html', context)
 
 
@@ -59,17 +56,20 @@ def all_books(request, id=None):
 
 def book_author(request, id=None):
     item = Product.objects.get(id=id)
+    author_list = Product.objects.select_related('author').get(id=id)
     
     context = {
         'items': Product.objects.all(),
-        'authors': Author.objects.all(),
+        'book_list': Product.objects.filter(author_id = id),
         'id': item.id, 
         'name': item.name,
         'cover': item.image,
         'author': item.author,
+        'author_id': item.author_id,
     }
     
-    return render(request,'bookstore/book_author_with_pk.html', context)
+    return render(request,'bookstore/book_author.html', context)
 
 def books(request):
     return render(request,'bookstore/books.html')
+

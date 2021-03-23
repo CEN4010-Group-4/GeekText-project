@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count
 from django.utils import timezone
 from django.urls import  reverse
 # Create your models here.
@@ -58,3 +59,7 @@ class Author(models.Model): # model to create table on database author
     
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+    class author_books(models.Model):
+        def get_books_count(self):
+            return book.objects.filter(authors=self).count()

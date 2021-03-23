@@ -50,7 +50,7 @@ from .models import Author
                 </tr>
                 <tr> 
                     <th scope="row">Author</td>   
-                    <td>{{ author }}</td>  
+                    <td><a href="{% url 'book_author' id=id %}">{{ author }}</a></td>  
                      
                 </tr>
                 <tr>  
