@@ -43,15 +43,17 @@
                 </tr>  
                 <tr>  
                     <th scope="row">Cover Image</td>   
-                    <td>{{ cover }}</td>
+                    
+                <td><a href="{% static cover %}" target="_blank">
+                    <img src="{% static cover %}" width="120" height="200"/></a></td>
                 </tr>
                 <tr>  
                     <th scope="row">Author</td>   
-                    <td>{{ author }}</td>   
+                    <td><a href="{% url 'book_author' id=id  %}">{{ author }}</a></td>  
                 </tr>
                 <tr>  
                     <th scope="row">Bio Info</td>  
-                    <td>{{ bio }}</td> 
+                    <td>{{ author.biography }}</td> 
                 </tr>
                 <tr>  
                     <th scope="row">Description</td> 
@@ -69,14 +71,7 @@
                     <th scope="row">Release Date</td>   
                     <td>{{ release_date }}</td> 
                 </tr>
-                <tr>  
-                    <th scope="row">Rating</td>  
-                    <td>{{'coming soon'}}</td>                     
-                </tr>
-                <tr>  
-                    <th scope="row">Comments</td>  
-                    <td>{{'coming soon'}}</td>    
-                </tr>
+                
                   
             </tbody>  
         </table>  
