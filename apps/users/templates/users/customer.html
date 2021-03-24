@@ -1,0 +1,28 @@
+{%  extends 'bookstore/main.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+<h1>Customer Page</h1>
+
+
+<form method="POST" action="">
+    {% csrf_token %}
+
+<!-- {{ form|crispy }}  Active form working -->
+
+
+{{ user_form|crispy }}
+<p>Shipping Infomation</p>
+{{ customer_form.as_p }}
+
+<div class="d-flex justify-content-center mt-3 login_container">
+    <input class="btn btn-danger" type="submit" value="Update">
+</div>
+
+</form>
+
+
+{% endblock content %}

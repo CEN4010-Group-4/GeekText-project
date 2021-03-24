@@ -1,0 +1,42 @@
+{% extends 'books.html' %}
+
+{% block title %}Search {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Search Results for <span class="text-info">"{{request.GET.q}}"</span></h3>
+            <hr>
+            {% for result in products %}
+            <div class="row">
+                <div class="col-md-8">
+                    <h4>{{result.name}}</h4>
+                    <h6>Author: {{result.author}}</h6>
+                    <h6>Genre: {{result.genre}}</h6>
+                    <h6>Price: {{result.price}}</h6>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if products.has_previous %}
+            <a href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ products.number }} {{ products.pagination.num_pages}}
+        </span>
+
+        {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+
+{% endblock content %}
+

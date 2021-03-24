@@ -1,0 +1,43 @@
+{%  extends 'bookstore/main.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<h1 style="text-align: center;">Search for a Book</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <form action="/search" method="GET">
+        <input type="text" name="q" placeholder="Search by title, author, or genre..." required>
+        <button>Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+ <form method = "GET" action="">
+   <select>
+      <option selected="selected" disabled>Genre:</option> 
+      
+      <option value="f">Fiction</option>
+      <option value="nf">Non-Fiction</option>
+     
+   </select>
+ </form>
+  
+  <div class="container">  
+    <p>
+      <h2 style="text-align:center;color:green;"> 
+          <a href="{% url 'all_books' %}">Click Here For Our Complete List of Books</a><br>
+      </h2>
+        
+    </p>
+    
+     
+  </div> 
+  
+  {% endblock content %}
+

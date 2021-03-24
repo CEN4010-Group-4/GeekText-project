@@ -1,0 +1,47 @@
+{%  extends 'bookstore/main.html' %}
+
+
+
+{% block title %} Shopping Cart{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <h4> Items in Cart </h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Book Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for items in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{items.product.name}}</td>
+                        <td>{{items.rate}}</td>
+                        <td>{{items.quantity}}</td>
+                        <td>${{items.subtotal}}</td>
+                        <td>
+                            <a href="{% url 'changecart' items.id %}?action=inc" class="btn btn-primary"> Increase </a>
+                            <a href="{% url 'changecart' items.id %}?action=dcr" class="btn btn-primary"> Decrease </a>
+                            <a href="{% url 'changecart' items.id %}?action=rmv" class="btn btn-primary"> Remove </a> 
+                        </td>
+
+                    </tr> 
+                    {% endfor %} 
+                    </tr> 
+                        <th colspan ="4"> Total </th>
+                        <th> ${{cart.total}} <th/>                 
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
