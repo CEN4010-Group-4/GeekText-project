@@ -21,7 +21,7 @@ class Genre(models.Model): # model to create table on database genre
 
 
 class Product(models.Model): # model to create table on database products
-    genre = models.ForeignKey(Genre,related_name='products',on_delete=models.CASCADE)
+    genre = models.ForeignKey('Genre',related_name='products',on_delete=models.CASCADE)
     author = models.ForeignKey('Author',related_name='authors',on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)

@@ -10,4 +10,5 @@ urlpatterns = [
     path('', include('apps.bookstore.urls')),
     
     
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

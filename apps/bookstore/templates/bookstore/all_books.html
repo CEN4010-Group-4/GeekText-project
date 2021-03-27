@@ -30,6 +30,8 @@ from .models import Product
                     <th scope="col">Genre</th>
                     <th data-sorter="false" scope="col">Cover Image</td>  
                     <th scope="col">Author</td> 
+                    <th scope="col">Price</th>
+                    <th data-sorter="false" scope="col">Release Date</th>
                 </tr>  
             </thead>  
               
@@ -40,8 +42,9 @@ from .models import Product
                     <td><a href="{% url 'book_details_with_pk' id=item.id %}">{{ item.name }}</a></td>   
                     <td>{{ item.genre }}</td>
                     <td><img src="{% static item.image %}" width="75" height="100"/></td> 
-                    <td>{{ item.author }}</td>    
-                    
+                    <td>{{ item.author }}</td>   
+                    <td>{{ item.price }}</td> 
+                    <td>{{ item.release_date }}</td>
                     <td><a href="{% url 'addtocart' item.id %}" class="btn btn-primary">Add To Cart</a>
                 </tr>  
                 {% endfor %}

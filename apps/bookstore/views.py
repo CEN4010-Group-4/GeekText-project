@@ -28,6 +28,7 @@ class SearchView(ListView):
             queryset_list = paginator.page(paginator.num_pages)
         return queryset_list    
 
+
 def book_details(request, id=None):
     item = Product.objects.get(id=id)
     
@@ -63,6 +64,40 @@ def all_books(request, id=None):
     
     return render(request,'bookstore/all_books.html', context)
 
+def browse_fiction(request, id=None):
+    if id:
+        book = Product.objects.get(id=id)
+    else:
+        book = Product.objects.get(id=1)
+
+    context = {
+        'books': Product.objects.all().filter(genre_id=1),
+
+        'name': book.name,
+        'cover': book.image,
+        'author': book.author,
+    }
+
+    
+    return render(request, 'bookstore/browse_fiction.html', context)
+
+def browse_nonfiction(request, id=None):
+    if id:
+        book = Product.objects.get(id=id)
+    else:
+        book = Product.objects.get(id=1)
+
+    context = {
+        'books': Product.objects.all().filter(genre_id=2),
+
+        'name': book.name,
+        'cover': book.image,
+        'author': book.author,
+
+    }
+
+    return render(request, 'bookstore/browse_nonfiction.html', context)
+
 def book_author(request, id=None):
     item = Product.objects.get(id=id)
     author_list = Product.objects.select_related('author').get(id=id)
@@ -81,6 +116,8 @@ def book_author(request, id=None):
 def books(request):
     
     return render(request,'bookstore/books.html')
+
+
 
 class AddToCartView(TemplateView):
     template_name = "addtocart.html"
