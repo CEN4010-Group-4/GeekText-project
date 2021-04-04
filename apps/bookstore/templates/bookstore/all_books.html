@@ -20,42 +20,39 @@ from .models import Product
       </p>
       
         <!-- Bootstrap table class -->
-    <div class="container">
-      <div class="col-md-12">
-        <table id="myTable" class="table table-striped tablesorter">  
-            <thead>  
-                <tr>  
-                    <th scope="col">ID #</td>  
-                    <th scope="col">Book Title</td>  
-                    <th scope="col">Genre</th>
-                    <th data-sorter="false" scope="col">Cover Image</td>  
-                    <th scope="col">Author</td> 
-                    <th scope="col">Price</th>
-                    <th data-sorter="false" scope="col">Release Date</th>
-                </tr>  
-            </thead>  
-              
-            <tbody>  
+        <table id="all" class="display">
+            <thead>
+                <tr>
+                    <th>ID #</th>
+                    <th>Book Title</th>
+                    <th>Genre</th>
+                    <th>Cover Image</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Release Date</th>
+                    <th>Add to Cart</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for item in items %}
-                <tr>  
-                    <td scope="row">{{ item.id }}</td>   
-                    <td><a href="{% url 'book_details_with_pk' id=item.id %}">{{ item.name }}</a></td>   
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td><a href="{% url 'book_details_with_pk' id=item.id %}">{{ item.name }}</a></td>
                     <td>{{ item.genre }}</td>
-                    <td><img src="{% static item.image %}" width="75" height="100"/></td> 
-                    <td>{{ item.author }}</td>   
-                    <td>{{ item.price }}</td> 
+                    <td><img src="{% static item.image %}" width="75" height="100"/></td>
+                    <td>{{ item.author }}</td>
+                    <td>{{ item.price }}</td>
                     <td>{{ item.release_date }}</td>
                     <td><a href="{% url 'addtocart' item.id %}" class="btn btn-primary">Add To Cart</a>
-                </tr>  
+                    </td>  
+        
+                </tr>
                 {% endfor %}
-            </tbody>  
+            </tbody>
         </table>
-        {% endblock %}
-      </div>  
-    </div> 
 
-    
-    </div>  
+    {% endblock %}
+</div>  
   
 
 

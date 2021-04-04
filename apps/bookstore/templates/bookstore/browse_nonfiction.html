@@ -13,35 +13,33 @@ from .models import Product
             Click the Book Name for More Details
         </h3>
       </p>
-    <div class="container">
-        <div class="col-md-12">
-            <table id="myTable" class="table-striped tablesorter">
-                <thead>
-                    <tr>
-                        <th data-sorter="false" scope="col">Genre</td>  
-                        <th scope="col">Book Title</td>  
-                        <th data-sorter="false" scope="col">Cover Image</td>  
-                        <th scope="col">Author</td> 
-                        <th scope="col">Price</th>
-                        <th data-sorter="false" scope="col">Release Date</th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    {% for book in books %}
-                <tr>  
-                    <td scope="row">{{ book.genre }}</td>   
-                    <td><a href="{% url 'book_details_with_pk' id=book.id %}">{{ book.name }}</a></td>   
-                    <td><img src="{% static book.image %}" width="75" height="100"/></td>
-                    <td>{{ book.author }}</td>    
-                    <td>{{ book.price }}</td>
-                    <td>{{ book.release_date }}</td>    
-                    <td><a href="{% url 'addtocart' book.id %}" class="btn btn-primary">Add To Cart</a>
-                </tr>  
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <table id="nonFiction" class="display">
+        <thead>
+            <tr>
+                <th>Genre</th>  
+                <th>Book Title</th>  
+                <th>Cover Image</th>  
+                <th>Author</th> 
+                <th>Price</th>
+                <th>Release Date</th>
+                <th>Add to Cart</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for book in books %}
+        <tr>  
+            <td scope="row">{{ book.genre }}</td>   
+            <td><a href="{% url 'book_details_with_pk' id=book.id %}">{{ book.name }}</a></td>   
+            <td><img src="{% static book.image %}" width="75" height="100"/></td>
+            <td>{{ book.author }}</td>    
+            <td>{{ book.price }}</td>
+            <td>{{ book.release_date }}</td>    
+            <td><a href="{% url 'addtocart' book.id %}" class="btn btn-primary">Add To Cart</a>
+        </td>  
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
