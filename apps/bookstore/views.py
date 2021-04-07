@@ -53,6 +53,7 @@ def all_books(request, id=None):
         item = Product.objects.get(id=1)
     
     
+    
     context = {
         'items': Product.objects.all().order_by('id'),
         
@@ -60,6 +61,10 @@ def all_books(request, id=None):
         'name': item.name,
         'cover': item.image,
         'author': item.author,
+        'release_date': item.release_date,
+        'genre': item.genre,
+        'price': item.price,
+        
     }
     
     return render(request,'bookstore/all_books.html', context)
@@ -98,18 +103,25 @@ def browse_nonfiction(request, id=None):
 
     return render(request, 'bookstore/browse_nonfiction.html', context)
 
-def book_author(request, id=None):
-    item = Product.objects.get(id=id)
-    author_list = Product.objects.select_related('author').get(id=id)
+def book_author(request, author_id=None):
+    item = Product.objects.get(id=author_id)
+    
     
     context = {
         'items': Product.objects.all(),
-        'book_list': Product.objects.filter(author_id = id),
-        'id': item.id, 
+        
+        
         'name': item.name,
         'cover': item.image,
+        'price': item.price,
         'author': item.author,
-        'author_id': item.author_id,
+        'release_date': item.release_date,
+        'genre': item.genre,
+        'author_id': item.author_id
+
+        
+
+        
     }
 
     return render(request,'bookstore/book_author.html', context)

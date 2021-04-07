@@ -35,6 +35,7 @@ class Product(models.Model): # model to create table on database products
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     
+    
     class Meta:
         ordering = ('-created',)
         index_together = (('id', 'slug'),)
