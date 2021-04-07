@@ -5,5 +5,7 @@
 {% block content %}
 <div class="container">
     <h3>Product added to cart successfully.</h3>
+    <a class="nav-item nav-link" href="{% url 'cart' %}">Proceed to Shopping Cart</a>
+    <a class="nav-item nav-link" href="{% url 'all_books' %}">Back to book list</a>
 </div>
 {% endblock %}

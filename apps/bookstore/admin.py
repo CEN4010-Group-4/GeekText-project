@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Genre, Product, Author, Cart, CartProduct
+from .models import Genre, Product, Author, Cart, CartProduct, Save
 
 
 
@@ -23,4 +23,4 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(
-    [Cart, CartProduct])
+    [Cart, CartProduct, Save])

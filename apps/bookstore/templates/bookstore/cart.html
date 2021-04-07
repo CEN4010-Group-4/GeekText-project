@@ -25,22 +25,42 @@
                     {% for items in cart.cartproduct_set.all %}
                     <tr>
                         <td>{{forloop.counter}}</td>
-                        <td>{{items.product.name}}</td>
-                        <td>{{items.rate}}</td>
+                        <td><a href="{% url 'book_details_with_pk' id=items.product.id %}">{{items.product.name}}</a></td> 
+                        <td>${{items.rate}}</td>
                         <td>{{items.quantity}}</td>
                         <td>${{items.subtotal}}</td>
                         <td>
                             <a href="{% url 'changecart' items.id %}?action=inc" class="btn btn-primary"> Increase </a>
                             <a href="{% url 'changecart' items.id %}?action=dcr" class="btn btn-primary"> Decrease </a>
                             <a href="{% url 'changecart' items.id %}?action=rmv" class="btn btn-primary"> Remove </a> 
+                            <a href="{% url 'changecart' items.id %}?action=sav" class="btn btn-primary"> Save </a> 
                         </td>
 
                     </tr> 
                     {% endfor %} 
                     </tr> 
                         <th colspan ="4"> Total </th>
-                        <th> ${{cart.total}} <th/>                 
+                        <th> ${{cart.total}} </th>
+                         
             </table>
+            <th> <h6> Items Saved For Later </h6> </th>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Book Name</th>
+                        <th>Price</th>
+                    </tr>
+                    <tbody>
+                    {% for items in item  %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{% url 'book_details_with_pk' id=items.product.id %}">{{items.product.name}}</a></td> 
+                        <td>${{items.rate}}</td>
+                    </tr> 
+                    {% endfor %} 
+                </thead>
+                </table>
         </div>
     </div>
 </div>

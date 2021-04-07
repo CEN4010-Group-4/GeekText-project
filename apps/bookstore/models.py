@@ -79,3 +79,10 @@ class CartProduct(models.Model):
     def __str__(self):
         return "Cart: " + str(self.cart.id) + " CartProduct: " + str(self.id)
 
+class Save(models.Model):
+    customer_save = models.ForeignKey(Customer, on_delete=models.SET_NULL, null = True, blank=True)
+    total_save = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    created_at_save = models.DateTimeField(default=timezone.now, blank=True, null=True)
+
+    def __str__(self):
+        return "Save: " + str(self.id)
