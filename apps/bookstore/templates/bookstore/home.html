@@ -1,12 +1,71 @@
-
 {%  extends 'bookstore/main.html' %}
 {% load crispy_forms_tags %}
 
 
 {% block content %}
 
-
+{% load static %}
 <h1 style="text-align: center;">Welcome to GeekText</h1>
+
+<br><br>
+
+<div style="text-align: center;">
+    Browse 
+<a class="btn btn-info" href="{% url 'all_books' %}" role="button">All Books</a>
+or Browse By: <a class="btn btn-info" href="{% url 'browse_fiction' %}" role="button">Fiction</a>
+<a class="btn btn-info" href="{% url 'browse_nonfiction' %}" role="button">Non-Fiction</a>
+
+<br><br>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    window.initializeCarousel=()=>{
+        $("#carouselExampleIndicators").carousel({interval:100});
+    }
+</script>
+
+<style type="text/css">
+.carousel-inner img{
+    width: 50%;
+    height: 75%;
+}    
+</style>
+
+<br>
+
+<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-interval="10000">
+        <a href="http://127.0.0.1:8000/%5Ebook_details/(%3FP20%5Cd+)/$">
+        <img src="{% static 'media/image1.jpg' %}" class="center" alt="...">
+      </div>
+      <div class="carousel-item" data-interval="10000">
+        <a href="http://127.0.0.1:8000/%5Ebook_details/(%3FP1%5Cd+)/$">
+        <img src="{% static 'media/image2.png' %}" class="center" alt="...">
+      </div>
+      <div class="carousel-item">
+        <a href="http://127.0.0.1:8000/%5Ebook_details/(%3FP10%5Cd+)/$">
+        <img src="{% static 'media/image3.jpg' %}" class="center" alt="...">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+
+
+
 <br><br><br><br><br><br>
     <div style="text-align: center;">
         Browse 

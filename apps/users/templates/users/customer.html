@@ -1,28 +1,367 @@
-{%  extends 'bookstore/main.html' %}
+{% extends 'bookstore/main.html' %}
 {% load crispy_forms_tags %}
 
 
 
 {% block content %}
 
-<h1>Customer Page</h1>
+    <h1>Customers Page</h1>
 
 
-<form method="POST" action="">
-    {% csrf_token %}
+    <form method="POST" action="">
+        {% csrf_token %}
 
-<!-- {{ form|crispy }}  Active form working -->
+        <!-- {{ form|crispy }}  Active form working -->
 
 
-{{ user_form|crispy }}
-<p>Shipping Infomation</p>
-{{ customer_form.as_p }}
+        {{ user_form|crispy }}
 
-<div class="d-flex justify-content-center mt-3 login_container">
-    <input class="btn btn-danger" type="submit" value="Update">
-</div>
+        <div class="d-flex justify-content-center mt-3 login_container">
+            <input class="btn btn-danger" type="submit" value="Update Profile Information">
+        </div>
 
-</form>
+    </form>
+
+    <hr>
+    <h2>Credit Card Information</h2>
+    <button data-toggle="modal" data-target="#cardModal" class="btn btn-success">Add credit card</button>
+    <div class="row mt-3">
+        <div class="col-sm-3">
+            <div class="list-group">
+                {% for card in cards %}
+                    <a href="#"
+                       class="list-group-item list-group-item-action flex-column align-items-start active mb-2">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ card.format_number }}</h5>
+                            <small>
+                                <button data-toggle="modal" data-target="#deleteCardModal"
+                                        onclick="setDeleteCard({{ card.id }})"
+                                        class="btn btn-danger badge badge-danger btn-lg">Delete Card
+                                </button>
+                                <button data-toggle="modal" data-target="#cardModal"
+                                        onclick="editCard({{ card.id }}, `{{ card.name_on_the_card }}`, `{{ card.number }}`, `{{ card.month }}`, `{{ card.year }}`, `{{ card.cvv }}`)"
+                                        class="btn btn-success badge badge-success btn-lg">Edit Card
+                                </button>
+                            </small>
+                        </div>
+                        <p class="mb-1">{{ card.name_on_the_card }}</p>
+                        <p class="mb-1">{{ card.card_issuer }}</p>
+                        <small>{{ card.month }}/{{ card.year }}</small>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <h2>Shipping Address</h2>
+    <button onclick="resetShipModal()" data-toggle="modal" data-target="#shipModal" class="btn btn-success">Add Shipping
+        Address
+    </button>
+    <div class="row mt-3">
+        <div class="col-sm-3">
+            <div class="list-group">
+                {% for addr in shipping_address %}
+                    <a href="#"
+                       class="list-group-item list-group-item-action flex-column align-items-start active mb-2">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ addr.home_address }}, {{ addr.street_address }}</h5>
+                            <small>
+                                <button onclick="setDeleteShip({{ addr.id }})" data-toggle="modal"
+                                        data-target="#deleteShipModal"
+                                        class="btn btn-success badge badge-danger btn-lg">Delete Address
+                                </button>
+                                <button data-toggle="modal" data-target="#shipModal"
+                                        onclick="editAddr({{ addr.id }}, `{{ addr.home_address }}`, `{{ addr.street_address }}`, `{{ addr.city }}`, `{{ addr.state }}`)"
+                                        class="btn btn-success badge badge-success btn-lg">Edit details
+                                </button>
+                            </small>
+                        </div>
+                        <p>{{ addr.city }}/{{ addr.state }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="cardModal" tabindex="-1" role="dialog" aria-labelledby="cardModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cardModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="card_form" method="post" action="{% url 'validate-card' %}">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Full name (on the card)</label>
+                            <input id="id_name" type="text" class="form-control" name="name" placeholder=""
+                                   required="">
+                        </div> <!-- form-group.// -->
+
+                        <div class="form-group">
+                            <label for="cardNumber">Card number</label>
+                            <div class="input-group">
+                                <input data-inputmask="'mask': '9999 9999 9999 9999'" id="id_number" type="text"
+                                       class="form-control" name="number"
+                                       placeholder="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text text-muted">
+                                        <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>  
+                                        <i class="fab fa-cc-mastercard"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div> <!-- form-group.// -->
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label><span class="hidden-xs">Expiration</span> </label>
+                                    <div class="input-group">
+                                        <input id="id_month" type="number" class="form-control" placeholder="MM"
+                                               name="month">
+                                        <input id="id_year" type="number" class="form-control" placeholder="YYYY"
+                                               name="year">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label data-toggle="tooltip" title=""
+                                           data-original-title="3 digits code on back side of the card">CVV
+                                        <i class="fa fa-question-circle"></i></label>
+                                    <input id="id_cvv" minlength="3" maxlength="3" type="number" class="form-control"
+                                           required="" name="cvv">
+                                </div> <!-- form-group.// -->
+                            </div>
+                        </div> <!-- row.// -->
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="confirm()" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="shipModal" tabindex="-1" role="dialog" aria-labelledby="shipModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="shipModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="id_addrForm" action="{% url 'add-ship' %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="cardNumber">House Number</label>
+                            <div class="input-group">
+                                <input required id="id_house_number" type="text"
+                                       class="form-control" name="home_address"
+                                       placeholder="">
+                            </div>
+                        </div> <!-- form-group.// -->
+
+                        <div class="form-group">
+                            <label for="cardNumber">Street Address</label>
+                            <div class="input-group">
+                                <input required id="id_street" type="text"
+                                       class="form-control" name="street_address"
+                                       placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardNumber">City</label>
+                            <div class="input-group">
+                                <input required id="id_city" type="text"
+                                       class="form-control" name="city"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">State</label>
+                            <div class="input-group">
+                                <input required id="id_state" type="text"
+                                       class="form-control" name="state"
+                                       placeholder="">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteShipModal" tabindex="-1" role="dialog" aria-labelledby="deleteShipModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteShipModalLabel">Are you sure?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Deleting shipping address?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button id="delete_button" type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteCardModal" tabindex="-1" role="dialog" aria-labelledby="deleteCardModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCardModalLabel">Are you sure?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Deleting card detail?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button id="delete_card_button" type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock content %}
+
+
+{% block extra_js %}
+    <script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#id_number").inputmask({"mask": "(999) 999-9999"}); //specifying options
+        });
+    </script>
+    <script>
+        function validateForm() {
+            let name = $("#id_name").val();
+            let number = $("#id_number").val();
+            let month = $("#id_month").val();
+            let year = $("#id_year").val();
+            let cvv = $("#id_cvv").val();
+            let validate = false;
+            if (number.length !== 19) {
+                toastr.error("Card number invalid");
+                validate = true;
+            }
+            if (month < 0 || month > 12 || month === "") {
+                toastr.error("Invalid  month")
+                validate = true;
+            }
+            if (year < 2021 || year === "") {
+                toastr.error("Invalid year");
+                validate = true;
+            }
+            if (cvv.length !== 3 || cvv === "") {
+                toastr.error("Invalid cvv");
+                validate = true;
+            }
+            return validate;
+        }
+
+        function confirm() {
+            let not_valid = validateForm();
+            if (!not_valid) {
+                $.ajax({
+                    url: '/credit-card-validate/',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        card_number: $("#id_number").val(),
+                        month: $("#id_month").val(),
+                        year: $("#id_year").val(),
+                        cvv: $("#id_cvv").val(),
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data.status) {
+                            toastr.error("Card information is invalid")
+                        } else {
+                            $("#card_form").submit();
+                        }
+                    }, error: function (err) {
+
+                    }
+                });
+            }
+        }
+
+        function editAddr(id, house, street, city, state) {
+            var form = $("#id_addrForm");
+            var url = `/edit-shipping-address/${id}/`
+            form.attr('action', url);
+            $("#id_house_number").val(house);
+            $("#id_street").val(street);
+            $("#id_city").val(city);
+            $("#id_state").val(state);
+        }
+
+        function setDeleteShip(id) {
+            $("#delete_button").attr("onclick", `location.href = '/delete-shipping-address/${id}/'`);
+        }
+
+        function resetShipModal() {
+            var form = $("#id_addrForm");
+            var url = `/add-shipping-address/`
+            form.attr('action', url);
+            $("#id_house_number").val('');
+            $("#id_street").val('');
+            $("#id_city").val('');
+            $("#id_state").val('');
+        }
+
+
+        function setDeleteCard(id) {
+            $("#delete_card_button").attr("onclick", `location.href = '/delete-card/${id}/'`);
+        }
+
+        function editCard(id, name, number, month, year, cvv) {
+            var form = $("#card_form");
+            var url = `/edit-card-validate/${id}/`
+            form.attr('action', url);
+            $("#id_name").val(name);
+            $("#id_number").val(number);
+            $("#id_month").val(month);
+            $("#id_year").val(year);
+            $("#id_cvv").val(cvv);
+        }
+    </script>
+{% endblock %}

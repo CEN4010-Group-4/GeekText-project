@@ -2,7 +2,6 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-
 {% block content %}
 
   
@@ -30,13 +29,13 @@
                     border-collapse: collapse;
                      }
             </style> 
-              
-            <tbody> 
+
              
+            <tbody> 
                 <tr>  
                     <th scope="row">ID #</td>
-                    <td>{{ id }}</td>  
-                </tr>  
+                    <td>{{ id }} <a href="{% url 'addtocart' id %}" class="btn btn-primary float-right">Add To Cart</a></td>  
+                </tr>
                 <tr>  
                     <th scope="row">Book Title</td>  
                     <td>{{ name }}</td>    

@@ -43,7 +43,7 @@ from .models import Product
                     <td>{{ item.author }}</td>
                     <td>{{ item.price }}</td>
                     <td>{{ item.release_date }}</td>
-                    <td><a href="{% url 'addtocart' item.id %}" class="btn btn-primary">Add To Cart</a>
+                    <td><a href="{% url 'addtocart' item.id %}" class="btn btn-primary btn-sm">Add To Cart</a>
                     </td>  
         
                 </tr>
@@ -54,7 +54,3 @@ from .models import Product
     {% endblock %}
 </div>  
   
-
-
-
-© 2021 GitHub, Inc.

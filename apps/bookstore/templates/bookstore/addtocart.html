@@ -3,8 +3,11 @@
 {% block title %}Add to cart{% endblock %}
 
 {% block content %}
+
+<br><br>
 <div class="container">
-    <h3>Product added to cart successfully.</h3>
+    <h3>The Book Has Been Successfully Added to Your Shopping Cart</h3>
+    <br><br>
     <a class="nav-item nav-link" href="{% url 'cart' %}">Proceed to Shopping Cart</a>
     <a class="nav-item nav-link" href="{% url 'all_books' %}">Back to book list</a>
 </div>

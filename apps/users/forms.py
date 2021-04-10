@@ -13,9 +13,13 @@ class CreateUserForm(UserCreationForm):
 
 class EditProfileForm(UserChangeForm):
     #fullname = forms.CharField(label="First name")
+    address_1 = forms.CharField(max_length=60)
+    city = forms.CharField(max_length=50)
+    zip_code = forms.IntegerField(max_value=99999)
+    phone = forms.CharField(max_length=15)
     class Meta:
         model = User
-        fields = ['first_name','last_name','username', 'email'] #Python list
+        fields = ['first_name','last_name','username', 'email', 'address_1', 'city', 'zip_code',  'phone'] #Python list
 
 class CustomerForm(ModelForm):
     class Meta:
