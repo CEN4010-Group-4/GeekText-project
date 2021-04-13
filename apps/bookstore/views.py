@@ -103,6 +103,22 @@ def browse_nonfiction(request, id=None):
 
     return render(request, 'bookstore/browse_nonfiction.html', context)
 
+def browse_topsellers(request, id=None):
+    if id:
+        book = Product.objects.get(id=id)
+    else:
+        book = Product.objects.get(id=1)
+
+    context = {
+        'books': Product.objects.all().filter(price__gt=30),
+
+        'name': book.name,
+        'cover': book.image,
+        'author': book.author,
+    }
+
+    return render(request, 'bookstore/browse_topsellers.html', context)
+
 def book_author(request, author_id=None):
     item = Product.objects.get(id=author_id)
     

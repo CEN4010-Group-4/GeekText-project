@@ -8,6 +8,7 @@ urlpatterns = [
     path('all_books/', views.all_books, name="all_books"),
     path('browse_fiction/', views.browse_fiction, name="browse_fiction"),
     path('browse_nonfiction/', views.browse_nonfiction, name="browse_nonfiction"),
+    path('browse_topsellers/', views.browse_topsellers, name="browse_topsellers"),
     path('book_details/', views.book_details, name="book_details"),
     path(r'^book_details/(?P<id>\d+)/$', views.book_details, name="book_details_with_pk"),
     path('books/', views.books, name="books"),

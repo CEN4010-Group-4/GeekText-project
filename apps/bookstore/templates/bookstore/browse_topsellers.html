@@ -1,0 +1,47 @@
+{%  extends 'bookstore/main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+from .models import Product
+{% block content %}
+<div class="container">
+    <p>
+        <h1 style="text-align:center;color:darkblue;"> 
+            TOP SELLERS<br>
+        </h1>
+
+        <h3 style="text-align:center;color:green;">
+            Click the Book Name for More Details
+        </h3>
+      </p>
+
+      <table id="topSellers" class="display">
+        <thead>
+            <tr>
+                <th>ID #</th>
+                    <th>Book Title</th>
+                    <th>Genre</th>
+                    <th>Cover Image</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Release Date</th>
+                    <th>Add to Cart</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for book in books %}
+        <tr>  
+            <td scope="row">{{ book.id }}</td>   
+            <td><a href="{% url 'book_details_with_pk' id=book.id %}">{{ book.name }}</a></td>  
+            <td scope="row">{{ book.genre }}</td>  
+            <td><img src="{% static book.image %}" width="75" height="100"/></td>
+            <td>{{ book.author }}</td>    
+            <td>{{ book.price }}</td>
+            <td>{{ book.release_date }}</td>    
+            <td><a href="{% url 'addtocart' book.id %}" class="btn btn-primary">Add To Cart</a>
+        </td>  
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

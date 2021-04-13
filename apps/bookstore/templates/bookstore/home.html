@@ -6,16 +6,20 @@
 
 {% load static %}
 <h1 style="text-align: center;">Welcome to GeekText</h1>
+<br>
+<h3 style="font-family:'Times New Roman', Times, serif; text-align: center; color: darkcyan;">"Search for all your favorite books"</h3>
 
 <br><br>
-
+<hr class="rounded">
 <div style="text-align: center;">
-    Browse 
+    <strong>Browse </strong>
 <a class="btn btn-info" href="{% url 'all_books' %}" role="button">All Books</a>
-or Browse By: <a class="btn btn-info" href="{% url 'browse_fiction' %}" role="button">Fiction</a>
+| Genres: <a class="btn btn-info" href="{% url 'browse_fiction' %}" role="button">Fiction</a>
 <a class="btn btn-info" href="{% url 'browse_nonfiction' %}" role="button">Non-Fiction</a>
-
+|
+<a class="btn btn-info" href="{% url 'browse_topsellers' %}" role="button">Top Sellers</a>
 <br><br>
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -68,10 +72,12 @@ or Browse By: <a class="btn btn-info" href="{% url 'browse_fiction' %}" role="bu
 
 <br><br><br><br><br><br>
     <div style="text-align: center;">
-        Browse 
+        <strong>Browse</strong>
     <a class="btn btn-info" href="{% url 'all_books' %}" role="button">All Books</a>
-    or Browse By: <a class="btn btn-info" href="{% url 'browse_fiction' %}" role="button">Fiction</a>
+    | <a class="btn btn-info" href="{% url 'browse_fiction' %}" role="button">Fiction</a>
     <a class="btn btn-info" href="{% url 'browse_nonfiction' %}" role="button">Non-Fiction</a>
+    |
+    <a class="btn btn-info" href="{% url 'browse_topsellers' %}" role="button">Top Sellers</a>
 </div>
 
 
